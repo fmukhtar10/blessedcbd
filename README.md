@@ -86,7 +86,7 @@ You can run the Cypress tests using the following command
 
 
 ### Note
-At checkout page, shopify pay method blocks cypress due to automted bot detection, due to this unable to complete checkout process. 
+At checkout page, shopify pay method blocks cypress due to automated bot detection, due to this unable to complete checkout process. 
 
 here is the error 
 ````
