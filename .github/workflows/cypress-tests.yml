@@ -1,0 +1,51 @@
+name: Cypress Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Checkout code
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2. Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      # 3. Install dependencies
+      - name: Install dependencies
+        run: npm i
+
+      # 4. Run Cypress tests with Mochawesome reporter
+      - name: Run Cypress tests
+        run: |
+          npm run test:checkout
+
+      # 5. Upload test reports as artifact
+      - name: Upload test report artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-test-report
+          path: cypress/reports/
+
+      # 6. Send report via email
+      - name: Send test report via email
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.example.com
+          server_port: 587
+          username: ${{ secrets.SMTP_USER }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+          subject: Cypress Test Report
+          to: recipient@example.com
+          from: Cypress CI <cypress@example.com>
+          body: Please find the attached Cypress test report.
+          attachments: cypress/reports/mochawesome.html

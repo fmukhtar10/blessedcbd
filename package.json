@@ -1,0 +1,20 @@
+{
+  "name": "blessed-cbd-uk",
+  "version": "1.0.0",
+  "description": "",
+  "main": "cypress.config.js",
+  "devDependencies": {
+    "cypress": "^13.13.1",
+    "cypress-iframe": "^1.0.1",
+    "cypress-mochawesome-reporter": "^3.6.1",
+    "cypress-xpath": "^2.0.1",
+    "xpath": "0.0.32"
+  },
+  "scripts": {
+    "test:checkout": "cypress run --spec cypress/e2e/**/**/product_checkout.e2e.js --browser chrome --headless",
+    "bs_test:checkout": "browserstack-cypress run --spec cypress/e2e/**/**/product_checkout.e2e.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
